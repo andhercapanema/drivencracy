@@ -1,7 +1,9 @@
 import { Router } from "express";
-import pollRouter from "./pollsRoutes.js";
+import pollsRouter from "./pollsRoutes.js";
+import choicesRouter from "./choicesRoutes.js";
 
 const router = Router();
-router.use(pollRouter);
+router.use(pollsRouter);
+router.use(choicesRouter);
 
 export default router;
