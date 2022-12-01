@@ -1,15 +1,13 @@
 import { pollsCollection } from "../database/db.js";
 import { ObjectId } from "mongodb";
 
-export default async function choicePollExistsValidation(req, res, next) {
+export default async function pollExistsValidation(req, res, next) {
     const pollId = req.body.pollId || req.params.id;
 
     if (pollId.length !== 24)
-        return res
-            .status(422)
-            .send({
-                message: "O pollID inserido necessita ter 24 caracteres!",
-            });
+        return res.status(422).send({
+            message: "O pollID inserido necessita ter 24 caracteres!",
+        });
 
     const poll = await pollsCollection.findOne({
         _id: ObjectId(pollId),

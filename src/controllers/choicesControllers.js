@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { choicesCollection } from "../database/db.js";
 
 export async function postChoice(req, res) {
@@ -17,7 +18,7 @@ export async function getChoices(req, res) {
 
     try {
         const pollChoices = await choicesCollection
-            .find({ pollId: id })
+            .find({ pollId: ObjectId(id) })
             .toArray();
 
         res.send(pollChoices);
