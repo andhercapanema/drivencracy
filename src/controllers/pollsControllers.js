@@ -1,5 +1,4 @@
-import { choicesCollection, pollsCollection } from "../database/db.js";
-import { ObjectId } from "mongodb";
+import { pollsCollection } from "../database/db.js";
 
 export async function postPoll(req, res) {
     const { newPoll } = res.locals;

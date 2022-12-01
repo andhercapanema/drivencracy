@@ -1,5 +1,3 @@
-import { pollsCollection } from "../database/db.js";
-import { ObjectId } from "mongodb";
 import { isPast } from "date-fns";
 
 export default async function choicePollExpiredValidation(req, res, next) {
