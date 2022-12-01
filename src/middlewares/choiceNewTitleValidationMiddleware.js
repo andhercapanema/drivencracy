@@ -8,7 +8,7 @@ export default async function choiceNewTitleValidation(req, res, next) {
             (await choicesCollection.findOne({ title })) !== null;
 
         if (titleAlreadyExists)
-            return res.status(409).send("Essa opção já existe!");
+            return res.status(409).send({ message: "Essa opção já existe!" });
     } catch (err) {
         console.error(err);
         res.sendStatus(500);

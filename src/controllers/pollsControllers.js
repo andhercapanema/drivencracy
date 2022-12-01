@@ -1,32 +1,12 @@
-import { parse, sub, add } from "date-fns";
-import ptBR from "date-fns/locale/pt-BR/index.js";
 import { pollsCollection } from "../database/db.js";
 
 export async function postPoll(req, res) {
-    const { title, expireAt } = req.body;
-
-    if (title === "") return res.sendStatus(422);
-
-    let parsedExpireAt;
-
-    if (expireAt === "") {
-        parsedExpireAt = add(new Date(), { days: 30, hours: -3 });
-    } else {
-        parsedExpireAt = sub(
-            parse(expireAt, "yyyy-MM-dd HH:mm", new Date(), {
-                locale: ptBR,
-            }),
-            { hours: 3 }
-        );
-    }
+    const { newPoll } = res.locals;
 
     try {
-        await pollsCollection.insertOne({
-            title,
-            expireAt: parsedExpireAt,
-        });
+        await pollsCollection.insertOne(newPoll);
 
-        res.sendStatus(201);
+        res.status(201).send(newPoll);
     } catch (err) {
         console.error(err);
         res.sendStatus(500);

@@ -1,7 +1,7 @@
 import { choicesCollection } from "../database/db.js";
 
 export async function postChoice(req, res) {
-    const newChoice = res.locals.newChoice;
+    const { newChoice } = res.locals;
 
     try {
         await choicesCollection.insertOne(newChoice);

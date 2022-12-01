@@ -14,16 +14,17 @@ export default async function choicePollValidation(req, res, next) {
         if (!pollIdExists)
             return res
                 .status(404)
-                .send(
-                    "O pollId inserido não corresponde a nenhuma enquete cadastrada!"
-                );
+                .send({
+                    message:
+                        "O pollId inserido não corresponde a nenhuma enquete cadastrada!",
+                });
     } catch (err) {
         console.error(err);
         res.sendStatus(500);
     }
 
     if (isPast(poll.expireAt))
-        return res.status(403).send("Essa enquete já expirou!");
+        return res.status(403).send({ message: "Essa enquete já expirou!" });
 
     next();
 }
